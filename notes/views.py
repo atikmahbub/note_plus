@@ -9,6 +9,12 @@ class NotesView(viewsets.ModelViewSet):
     serializer_class = NoteSerializer
     queryset = Note.objects.all()
 
+    # def get_queryset(self):
+    #     #we can add search functionality here by tags or we can also use django filter to filter from queryset
+    #     #get query params and filter queryset
+    #     return super().get_queryset()
+    
+
 
 class NoteShareView(viewsets.ModelViewSet):
     serializer_class = ShareNoteSerializer
