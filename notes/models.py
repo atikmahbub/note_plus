@@ -16,3 +16,10 @@ class Note(models.Model):
     def __str__(self):
         return str(self.author) + str(self.title)
 
+class ShareNote(models.Model):
+    note_id = models.ForeignKey(Note, related_name="note_shared_with", on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.note_id)
