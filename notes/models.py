@@ -15,3 +15,4 @@ class Note(models.Model):
 
     def __str__(self):
         return str(self.author) + str(self.title)
+

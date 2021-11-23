@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import React from "react";
+import moment from "moment";
 
 const NoteHeader = styled("h3")({
   fontWeight: 600,
@@ -29,48 +29,52 @@ const Tag = styled("span")({
   fontSize: 10,
 });
 
-type NoteProps = {
-  handleNoteClick: (id: number) => void;
+type AuthorType = {
+  id: number;
+  username: string;
+  email: string;
 };
 
-const Note = ({ handleNoteClick }: NoteProps) => {
+type dataProps = {
+  created: string;
+  updated: string;
+  title: string;
+  tags: string[];
+  author: AuthorType;
+  text: string;
+  id: string;
+};
+
+type NoteProps = {
+  handleNoteClick: (id: string) => void;
+  data: dataProps;
+};
+
+const Note = ({ handleNoteClick, data }: NoteProps) => {
   return (
     <Stack spacing={2.5}>
-      <NoteHeader onClick={() => handleNoteClick(1)}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s
+      <NoteHeader onClick={() => handleNoteClick(data?.id)}>
+        {data?.title}
       </NoteHeader>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="row" spacing={2}>
           <Typography fontWeight={500} color="gray" variant="caption">
-            created : 27th jun,2021
+            created : {moment(data?.created).format("DD/MM/YYYY")}
           </Typography>
           <Typography fontWeight={500} color="gray" variant="caption">
-            updated : 27th jun,2021
+            updated : {moment(data?.updated).format("DD/MM/YYYY")}
           </Typography>
           <Typography fontWeight={500} color="gray" variant="caption">
-            author: Atik Mahbub
+            author: {data?.author.username}
           </Typography>
         </Stack>
         <Tags>
-          <Tag>#tag1</Tag>
-          <Tag>#tag2</Tag>
-          <Tag>#tag3</Tag>
-          <Tag>#tag4</Tag>
+          {data?.tags.map((tag: string, i: number) => (
+            <Tag key={i}>#{tag}</Tag>
+          ))}
         </Tags>
       </Stack>
-      <NoteDetails>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of
-        letters, as opposed to using 'Content here, content here', making it
-        look like readable English. Many desktop publishing packages and web
-        page editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like).
-      </NoteDetails>
+      <NoteDetails>{data?.text}</NoteDetails>
     </Stack>
   );
 };

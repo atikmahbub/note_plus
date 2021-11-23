@@ -5,6 +5,6 @@ from .models import Note
 from rest_framework.permissions import IsAuthenticated
 
 class NotesView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = NoteSerializer
     queryset = Note.objects.all()

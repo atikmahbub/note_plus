@@ -1,6 +1,6 @@
 import { TextareaAutosize } from "@mui/base";
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextInput from "../../components/Input/TextInput";
 
 const AddNoteLayout = styled("div")({
@@ -20,12 +20,39 @@ const TextArea = styled(TextareaAutosize)({
   },
 });
 
-const AddNote = () => {
+type AddNoteProps = {
+  getValue: (value: any) => void;
+};
+
+const AddNote = ({ getValue }: AddNoteProps) => {
+  const [state, setState] = useState({
+    title: "",
+    text: "",
+    tags: "",
+  });
+
+  useEffect(() => {
+    if (getValue) {
+      getValue(state);
+    }
+  }, [getValue, state]);
+
   return (
     <AddNoteLayout>
-      <TextInput label="Title" />
-      <TextArea minRows={10} placeholder="Note Details" />
-      <TextInput label="Tags" />
+      <TextInput
+        label="Title"
+        onChange={(e) => setState({ ...state, title: e.target.value })}
+      />
+      <TextArea
+        minRows={10}
+        placeholder="Note Details"
+        onChange={(e) => setState({ ...state, text: e.target.value })}
+      />
+      <TextInput
+        label="Tags"
+        placeholder="comma separated"
+        onChange={(e) => setState({ ...state, tags: e.target.value })}
+      />
     </AddNoteLayout>
   );
 };

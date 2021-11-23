@@ -42,7 +42,6 @@ const SignUp = () => {
       <AuthContainer>
         <AuthLayout alignItems="center" spacing={4}>
           <Header>Sign Up</Header>
-
           <Controller
             control={control}
             name={"email"}

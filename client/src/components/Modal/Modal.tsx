@@ -24,6 +24,7 @@ type DialogProps = {
   handleClose: () => void;
   header: string;
   children: React.ReactNode;
+  handleSave: () => void;
 };
 
 export default function FullScreenDialog({
@@ -32,6 +33,7 @@ export default function FullScreenDialog({
   handleClose,
   header,
   children,
+  handleSave,
 }: DialogProps) {
   return (
     <Dialog
@@ -53,7 +55,7 @@ export default function FullScreenDialog({
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
             {header}
           </Typography>
-          <Button autoFocus color="inherit" onClick={handleClose}>
+          <Button autoFocus color="inherit" onClick={handleSave}>
             save
           </Button>
         </Toolbar>
