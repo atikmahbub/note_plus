@@ -14,9 +14,9 @@ export const addNoteApiCall = (data: any, navigate: any) => {
   };
 };
 
-export const getAllNotesApiCall = () => {
+export const getAllNotesApiCall = (search: string) => {
   return async (dispatch: any) => {
-    API.get(`${endPoints.note}/`)
+    API.get(`${endPoints.note}/?tag=${search}`)
       .then((response) => {
         dispatch({
           type: GET_NOTE_SUCCESS,
@@ -40,6 +40,31 @@ export const getNoteDetails = (id: string) => {
       })
       .catch((error) => {
         console.log(error);
+      });
+  };
+};
+
+export const deleteNoteApiCall = (id: string, navigate: any) => {
+  return async (dispatch: any) => {
+    API.delete(`${endPoints.note}/${id}/`)
+      .then((response) => {
+        toast.success("deleted successfully!");
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const shareNoteApiCall = (data: any) => {
+  return async (dispatch: any) => {
+    API.post(`${endPoints.shareNote}/`, data)
+      .then((response) => {
+        toast.success("shared successfully");
+      })
+      .catch((error) => {
+        toast.error("something went wrong!");
       });
   };
 };

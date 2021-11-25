@@ -5,9 +5,10 @@ import SearchIcon from "@mui/icons-material/Search";
 
 type SearchProps = {
   handleClickOpen: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const SearchBar = ({ handleClickOpen }: SearchProps) => {
+const SearchBar = ({ handleClickOpen, onChange }: SearchProps) => {
   return (
     <Stack mt={6} direction="row" spacing={2}>
       <MuiButton variant="outlined" color="success" onClick={handleClickOpen}>
@@ -17,6 +18,7 @@ const SearchBar = ({ handleClickOpen }: SearchProps) => {
         fullWidth
         color="success"
         placeholder="Search Notes By Tag"
+        onChange={onChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

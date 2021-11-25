@@ -16,7 +16,12 @@ const NoteDetails = () => {
     <DashboardContainer>
       <ProfileBar username={username} />
       <Box mt={5}>
-        <Note data={noteDetails} handleNoteClick={() => {}} />
+        <Note
+          data={noteDetails}
+          handleNoteClick={() => {}}
+          handleTagClick={() => {}}
+          detail
+        />
       </Box>
     </DashboardContainer>
   );

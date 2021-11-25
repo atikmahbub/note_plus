@@ -23,7 +23,7 @@ type DialogProps = {
   handleClickOpen: () => void;
   handleClose: () => void;
   header: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   handleSave: () => void;
 };
 

@@ -1,3 +1,4 @@
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const GET_NOTE_SUCCESS = "GET_NOTE_SUCCESS";
 export const GET_NOTE_DETAILS = "GET_NOTE_DETAILS";
+export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";

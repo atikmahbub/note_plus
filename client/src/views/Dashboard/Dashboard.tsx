@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Modal from "../../components/Modal";
 import AddNote from "../../containers/Note/AddNote";
 import { useNavigate } from "react-router";
@@ -10,6 +10,7 @@ import NoteContainer from "./NoteContainer";
 import { useAppDispatch } from "../../app/store/hooks";
 import { addNoteApiCall } from "../../features/actions/noteActions";
 import useNoteHook from "../../hooks/useNoteHook";
+import { useDebounce } from "use-debounce";
 
 export const DashboardContainer = styled("div")({
   minHeight: "100vh",
@@ -22,11 +23,14 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { username, user_id } = useAuth();
   const dispatch = useAppDispatch();
+  const [search, setSearch] = useState("");
+  const [searchValue] = useDebounce(search, 800);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const [addNote, setAddNote] = useState<any>();
-  const { allNotes } = useNoteHook();
+  const { allNotes } = useNoteHook(searchValue);
 
   const handleClose = () => {
     setOpen(false);
@@ -52,6 +56,10 @@ const Dashboard = () => {
     }
   };
 
+  const handleTagClick = (tag: string) => {
+    setSearch(tag);
+  };
+
   return (
     <Fragment>
       <Modal
@@ -65,8 +73,15 @@ const Dashboard = () => {
       </Modal>
       <DashboardContainer>
         <ProfileBar username={username} />
-        <SearchBar handleClickOpen={handleClickOpen} />
-        <NoteContainer handleNoteClick={handleNoteClick} notes={allNotes} />
+        <SearchBar
+          handleClickOpen={handleClickOpen}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <NoteContainer
+          handleNoteClick={handleNoteClick}
+          notes={allNotes}
+          handleTagClick={handleTagClick}
+        />
       </DashboardContainer>
     </Fragment>
   );

@@ -2,15 +2,15 @@ import React, { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../app/store/hooks";
 import { getAllNotesApiCall } from "../features/actions/noteActions";
 
-const useNoteHook = () => {
+const useNoteHook = (search: string) => {
   const dispatch = useAppDispatch();
   const { allNotes } = useAppSelector((state) => ({
     allNotes: state.note.allNotes,
   }));
 
   useEffect(() => {
-    dispatch(getAllNotesApiCall());
-  }, [dispatch]);
+    dispatch(getAllNotesApiCall(search));
+  }, [dispatch, search]);
 
   return useMemo(
     () => ({
