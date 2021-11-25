@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import Modal from "../../components/Modal";
 import AddNote from "../../containers/Note/AddNote";
 import { useNavigate } from "react-router";
