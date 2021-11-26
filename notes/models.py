@@ -14,7 +14,7 @@ class Note(models.Model):
         ordering = ("-created",)
 
     def __str__(self):
-        return str(self.author) + str(self.title)
+        return  str(self.title)
 
 class ShareNote(models.Model):
     note_id = models.ForeignKey(Note, related_name="note_shared_with", on_delete=models.CASCADE)
